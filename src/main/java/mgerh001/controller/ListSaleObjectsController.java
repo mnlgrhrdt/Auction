@@ -12,11 +12,7 @@ import mgerh001.auction.model.SaleObject;
 import mgerh001.auction.util.Events.Deleted;
 
 /**
- * Die Beispielanwendung Auction soll es Besitzern von Gegenständen, die sie nicht mehr benötigen, diese zu einem guten Preis zu verkaufen.
- * Über ein Onlineformular soll es möglich sein, Links zu erzeugen, damit der Verkäufer die Auktionen einfacher verteilen kann.
- * Dazu kommt später eine zweite Anwendung deren Aufgabe es sein wird zu einer vom Benutzer frei wählbaren Auktion eine Liste aller Gebote anzuzeigen, damit er verfolgen kann,
- * wie hoch sich die Gebote gerade befinden.
- * 
+ *
  * Dieser Controller erhält die Lebensdauer für die Sitzung.
  * Für jede mögliche Interaktion des Nutzers mit der View wird eine Kontrolllogik definiert.
  * @author mgerh001
