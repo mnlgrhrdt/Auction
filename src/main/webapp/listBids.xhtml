@@ -1,0 +1,67 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<body>
+	<f:view contracts="#{view.locale.language}">
+		<ui:composition template="/template.xhtml">
+			<ui:define name="content">
+				<h1>#{msg['listBids.bidList']}
+					'#{selectedSaleObject.name}'</h1>
+				<h2>#{msg['listBids.beneficiaryAccount']}:
+					#{selectedSaleObject.account.name},
+					#{msg['listBids.iban']}:
+					#{selectedSaleObject.account.iban}
+					#{selectedSaleObject.account.nameOfBank}</h2>
+				<h:form>
+					<h:dataTable value="#{selectedSaleObject.bids}"
+						var="bid">
+						<h:column>
+							<f:facet name="header">
+								#{msg['listBids.name']}
+							</f:facet>
+							<h:outputText value="#{bid.tendererName}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								#{msg['listBids.iban']}
+							</f:facet>
+							<h:outputText value="#{bid.account.iban}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								#{msg['listBids.nameOfBank']}
+							</f:facet>
+							<h:outputText value="#{bid.account.nameOfBank}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								#{msg['listBids.bidAmount']}
+							</f:facet>
+							<h:outputText value="#{bid.amount}">
+								<f:convertNumber type="currency" currencyCode="EUR" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								#{msg['listBids.receipt']}
+							</f:facet>
+							<h:outputText
+								value="#{bid.receiptRequested ? msg['listBids.yes'] : msg['listBids.no']}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header" >
+								#{msg['listBids.status']}
+							</f:facet>
+							<h:outputText value="#{msg['listBids.status.TRANSFERRED']}" rendered="#{bid.status == 'TRANSFERRED'}" />
+							<h:outputText value="#{msg['listBids.status.IN_PROCESS']}" rendered="#{bid.status == 'IN_PROCESS'}" />
+						</h:column>
+					</h:dataTable>
+					<h:commandButton value="OK" action="#{listBidsController.doOk}"/>
+				</h:form>
+			</ui:define>
+		</ui:composition>
+	</f:view>
+</body>
+</html>

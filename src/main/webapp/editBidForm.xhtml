@@ -1,0 +1,40 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<body>
+	<f:view contracts="#{view.locale.language}">
+		<ui:composition template="/template.xhtml">
+			<ui:define name="content">
+				<h1>#{msg['editBidForm.edit_Bid_Form']}</h1>
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:outputLabel value="#{msg['editBidForm.backgroundColor']}:">
+						</h:outputLabel>
+						<h:selectOneMenu id="bgColor" value="#{msg['editBidFormController.bgColor']}">
+							<f:selectItem itemLabel="#FFFFFF" itemValue="FFFFFF" />
+							<f:selectItem itemLabel="#000000" itemValue="000000" />
+							<f:selectItem itemLabel="#FF0000" itemValue="FF0000" />
+							<f:ajax render="url" />
+						</h:selectOneMenu>
+						<h:outputLabel value="#{msg['editBidForm.textColor']}:">
+						</h:outputLabel>
+						<h:selectOneMenu id="textColor" value="#{msg['editBidFormController.textColor']}">
+							<f:selectItem itemLabel="#FFFFFF" itemValue="FFFFFF" />
+							<f:selectItem itemLabel="#000000" itemValue="000000" />
+							<f:selectItem itemLabel="#FF0000" itemValue="FF0000" />
+							<f:ajax render="url" />
+						</h:selectOneMenu>
+						<h:outputLabel value="#{msg['editBidForm.formUrl']}:">
+						</h:outputLabel>
+						<h:inputTextarea id="url" rows="6" cols="30" readonly="true" value="#{editBidFormController.url}" />
+					</h:panelGrid>
+					<h:commandButton value="OK" action="#{editBidFormController.doOk}" />
+				</h:form>
+			</ui:define>
+		</ui:composition>
+	</f:view>
+</body>
+
+</html>

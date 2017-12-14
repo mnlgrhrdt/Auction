@@ -1,0 +1,99 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<body>
+	<f:view contracts="#{view.locale.language}">
+		<ui:composition template="/template.xhtml">
+			<ui:define name="content">
+				<h1>#{addMode ? msg['editSaleObject.addNewSaleObject'] :
+					msg['editSaleObject.edit_SaleObject']}</h1>
+				<h:form>
+					<h:panelGrid columns="3">
+						<f:facet name="header">
+							#{msg['editSaleObject.general']}
+						</f:facet>
+						<h:outputLabel value="#{msg['editSaleObject.name']}:">
+						</h:outputLabel>
+						<h:inputText id="aName" value="#{selectedSaleObject.name}"
+							validatorMessage="#{msg['editSaleObject.saleObjectNameValidation']}">
+							<f:passThroughAttribute name="placeholder"
+								value="#{msg['editSaleObject.nameOfTheSaleObject']}" />
+							<f:validateRequired />
+							<f:validateLength minimum="2" maximum="30" />
+						</h:inputText>
+						<h:message for="aName" style="color: grey;" />
+						<h:outputLabel value="#{msg['editSaleObject.immediatePurchase']}:">
+						</h:outputLabel>
+						<h:panelGroup>
+							<h:inputText id="aImmediatePurchase"
+								value="#{selectedSaleObject.immediatePurchase}"
+								validatorMessage="#{msg['editSaleObject.immediatePurchaseValidation']}">
+								<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+								<f:validateRequired />
+								<f:validateDoubleRange minimum="1.0" />
+							</h:inputText> EUR
+						</h:panelGroup>
+						<h:message for="aImmediatePurchase" style="color: grey;" />
+						<h:outputLabel value="#{msg['editSaleObject.bidMinimum']}:">
+						</h:outputLabel>
+						<h:panelGroup>
+							<h:inputText id="aBidMinimum"
+								value="#{selectedSaleObject.bidMinimum}"
+								validatorMessage="#{msg['editSaleObject.bidMinimumValidation']}">
+								<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+								<f:validateRequired />
+								<f:validateDoubleRange minimum="1.0" />
+							</h:inputText> EUR
+						</h:panelGroup>
+						<h:message for="aBidMinimum" style="color: grey;" />
+						<h:outputLabel value="#{msg['editSaleObject.endDate']}:">
+						</h:outputLabel>
+						<h:panelGroup>
+							<h:inputText id="aEndDate" type="date"
+								value="#{selectedSaleObject.endDate}"
+								validatorMessage="#{msg['editSaleObject.endDateValidation']}">
+								<f:convertDateTime pattern="dd/mm/yyyy" />
+								<f:validateRequired />
+							</h:inputText>
+						</h:panelGroup>
+						<h:message for="aEndDate" style="color: grey;" />
+					</h:panelGrid>
+					<h:panelGrid columns="3">
+						<f:facet name="header">
+							#{msg['editSaleObject.bankAccount']}
+						</f:facet>
+						<h:outputLabel value="#{msg['editSaleObject.bankAccount']}:">
+						</h:outputLabel>
+						<h:inputText id="bName" value="#{selectedSaleObject.account.name}"
+							validatorMessage="#{msg['editSaleObject.simpleValidationMessage']}">
+							<f:validateRequired />
+						</h:inputText>
+						<h:message for="bName" style="color: grey;" />
+						<h:outputLabel value="#{msg['editSaleObject.iban']}:">
+						</h:outputLabel>
+						<h:inputText id="bIban" value="#{selectedSaleObject.account.iban}"
+							validatorMessage="#{msg['editSaleObject.simpleValidationMessage']}">
+							<f:validateRequired />
+						</h:inputText>
+						<h:message for="bIban" style="color: grey;" />
+						<h:outputLabel value="#{msg['editSaleObject.nameOfBank']}:">
+						</h:outputLabel>
+						<h:inputText id="bNameOfBank"
+							value="#{selectedSaleObject.account.nameOfBank}"
+							validatorMessage="#{msg['editSaleObject.simpleValidationMessage']}">
+							<f:validateRequired />
+						</h:inputText>
+						<h:message for="bNameOfBank" style="color: grey;" />
+					</h:panelGrid>
+					<h:commandButton value="#{msg['editSaleObject.save']}"
+						action="#{editSaleObjectController.doSave}" />
+					<h:commandButton value="#{msg['editSaleObject.cancel']}"
+						immediate="true" action="#{editSaleObjectController.doCancel}" />
+				</h:form>
+			</ui:define>
+		</ui:composition>
+	</f:view>
+</body>
+</html>

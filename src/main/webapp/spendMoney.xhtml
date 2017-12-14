@@ -1,0 +1,72 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>#{msg['spendMoney.bid_Money']}</title>
+	<meta charset="utf-8" />
+	<f:metadata>
+		<f:viewParam id="bgColor" name="bgColor"
+			value="#{bidMoneyController.bgColor}">
+			<f:validateRegex pattern="[A-Fa-f0-9]{6}" />
+		</f:viewParam>
+		<f:viewParam id="textColor" name="textColor"
+			value="#{bidMoneyController.textColor}">
+			<f:validateRegex pattern="[A-Fa-f0-9]{6}" />
+		</f:viewParam>
+		<f:viewParam id="saleObjectid" name="saleObjectId"
+			converter="javax.faces.Long" value="#{bidMoneyController.auctionId}">
+		</f:viewParam>
+	</f:metadata>
+</h:head>
+<h:body
+	style="margin: 0;
+	font-family: Verdana, sans-serif;
+	font-size: 0.9em;	
+	background-color: ##{bidMoneyController.bgColor};
+	color: ##{bidMoneyController.textColor}">
+	<h1>#{msg['spendMoney.bid_Money']}</h1>
+	<h:messages globalOnly="true" />
+	<h:message for="bgColor" style="color: red;" />
+	<h:message for="textColor" style="color: red;" />
+	<h:message for="saleObjectId" style="color: red" />
+	<h:form>
+		<h:panelGrid columns="3">
+			<h:outputLabel value="#{msg['spendMoney.name']}:">
+			</h:outputLabel>
+			<h:inputText id="name" value="#{bidMoneyController.bid.tendererName}">
+				<f:validateRequired />
+			</h:inputText>
+			<h:messages for="name" style="color: red;" />
+			<h:outputLabel value="#{msg['spendMoney.iban']}:">
+			</h:outputLabel>
+			<h:inputText id="iban" value="#{bidMoneyController.bid.account.iban}">
+				<f:validateRequired />
+			</h:inputText>
+			<h:message for="iban" style="color: red;" />
+			<h:outputLabel value="#{msg['spendMoney.nameOfBank']}:">
+			</h:outputLabel>
+			<h:inputText id="nameOfBank"
+				value="#{bidMoneyController.bid.account.nameOfBank}">
+				<f:validateRequired />
+			</h:inputText>
+			<h:message for="nameOfBank" style="color: red;" />
+			<h:outputLabel value="#{msg['spendMoney.bidAmount']}:">
+			</h:outputLabel>
+			<h:panelGroup>
+				<h:inputText id="bidAmount" value="#{bidMoneyController.bid.amount}">
+					<f:validateRequired />
+					<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+				</h:inputText> EUR
+			</h:panelGroup>
+			<h:message for="bidAmount" style="color: red;" />
+		</h:panelGrid>
+		<h:selectBooleanCheckbox
+			value="#{bidMoneyController.bid.receiptRequested}" />
+		#{msg['spendMoney.iWantAReceipt']} <br />
+		<h:commandButton value="#{msg['spendMoney.bid']}"
+			action="#{spendMoneyController.doBid}" />
+	</h:form>
+</h:body>
+</html>

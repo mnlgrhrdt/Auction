@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<body>
+	<f:view contracts="#{view.locale.language}">
+		<ui:composition template="/template.xhtml">
+			<ui:define name="content">
+				<h1>#{msg['listSaleObjects.myAuctions']}</h1>
+				<h:form>
+					<h:dataTable value="#{saleObjects}" var="saleObject">
+						<h:column>
+							<h:commandLink value="x"
+								actionListener="#{listSaleObjectsController.doDeleteSaleObject(saleObject)}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">#{msg['listSaleObjects.name']}</f:facet>
+							<h:outputText value="#{saleObject.name}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">#{msg['listSaleObjects.immediatePurchase']}</f:facet>
+							<h:outputText value="#{saleObject.immediatePurchase}">
+								<f:convertNumber type="currency" currencyCode="EUR" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">#{msg['listSaleObjects.maxBidSoFar']}</f:facet>
+							<h:outputText value="#{saleObject.maxBidSoFar}">
+								<f:convertNumber type="currency" currencyCode="EUR" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">#{msg['listSaleObjects.endDate']}</f:facet>
+							<h:outputText value="#{saleObject.endDate}">
+								<f:convertDateTime pattern = "dd/mm/yyyy" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<h:commandLink value="#{msg['listSaleObjects.edit']}"
+								action="#{listSaleObjectsController.doEditSaleObject(saleObject)}" />
+						</h:column>
+						<h:column>
+							<h:commandLink value="#{msg['listSaleObjects.listSaleObjects']}"
+								action="#{listSaleObjectsController.doListBids(saleObject)}" />
+						</h:column>
+						<h:column>
+							<h:commandLink value="#{msg['listSaleObjects.bid']}"
+								action="#{listSaleObjectsController.doEditBidForm(saleObject)}" />
+						</h:column>
+					</h:dataTable>
+					<h:commandLink value="#{msg['listSaleObjects.addSaleObject']}"
+						action="#{listSaleObjectsController.doAddSaleObject}" />
+				</h:form>
+			</ui:define>
+		</ui:composition>
+	</f:view>
+</body>
+</html>
