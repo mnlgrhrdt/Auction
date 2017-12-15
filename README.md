@@ -4,5 +4,5 @@ Dazu kommt später eine zweite Anwendung deren Aufgabe es sein wird zu einer vom
 
 Was noch nicht behandelt wurde:
 1. Java Persistence API: Die Beispieldaten sollen durch reale Daten ersetzt werden. Durch JPA sollen die Entitäten in einer Datenbank gespeichert werden und zu einem späteren Zeitpunkt wieder einlesbar sein.
-2. ransaktionssicherheit durch EJB
+2. Transaktionssicherheit durch EJB
 3. Funktionale Test mit Arquillian und Graphene Framework
